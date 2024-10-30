@@ -1,0 +1,13 @@
+version: '3'  
+services:  
+  grafana:  
+    image: grafana/grafana  
+    environment:  
+      - GF_SECURITY_ADMIN_PASSWORD=your_password  
+    ports:  
+      - "3000:3000"  
+    volumes:  
+      - ./grafana/provisioning:/etc/grafana/provisioning  
+      - ./create_api_key.sh:/etc/grafana/scripts/create_api_key.sh  
+    entrypoint: ["/bin/bash", "/etc/grafana/scripts/create_api_key.sh"]  
+    # You may need to include sleep to wait for Grafana to be fully ready
